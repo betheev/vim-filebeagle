@@ -151,9 +151,9 @@ function! s:discover_paths(current_dir, glob_pattern, is_include_hidden, is_incl
     let l:current_dir = substitute(l:current_dir, '}', '\\}', 'g')
 
     if a:is_include_hidden
-        let path_str = glob(l:current_dir.s:sep.'.[^.]'.a:glob_pattern)."\n".glob(l:current_dir.s:sep.a:glob_pattern)
+        let path_str = glob(l:current_dir.'.[^.]'.a:glob_pattern)."\n".glob(l:current_dir.a:glob_pattern)
     else
-        let path_str = glob(l:current_dir.s:sep.a:glob_pattern)
+        let path_str = glob(l:current_dir.a:glob_pattern)
     endif
     let paths = split(path_str, '\n')
     if g:filebeagle_check_gitignore && !a:is_include_ignored && executable('git')
